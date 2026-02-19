@@ -1,200 +1,453 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>JahanCraft Server</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سرور جهان‌کرفت | وبسایت رسمی</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0b0f1a;
-  --card:#121a2b;
-  --accent:#6c5cff;
-  --accent2:#00e0ff;
-  --text:#fff;
+/* ===================== Reset ===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', sans-serif;
 }
 
-body{margin:0;font-family:'Vazirmatn',sans-serif;background:radial-gradient(circle at 20% 20%,#1a1f3d,#05070f);color:var(--text);}
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    overflow-x: hidden;
+}
 
-/* HEADER */
-header{position:sticky;top:0;backdrop-filter:blur(20px);background:rgba(10,15,30,.6);display:flex;align-items:center;justify-content:space-between;padding:14px 40px;z-index:100;}
-.logoBox{display:flex;align-items:center;gap:12px;cursor:pointer;}
-.logoBox img{width:48px;height:48px;border-radius:12px;object-fit:cover;}
-nav a{margin:0 16px;text-decoration:none;color:#cfd8ff;font-weight:600;}
-nav a:hover{color:white}
-.userBox{position:relative;cursor:pointer;font-weight:700;}
-.userDropdown{position:absolute;top:40px;left:0;background:#11182b;padding:10px;border-radius:10px;display:none;min-width:140px;box-shadow:0 10px 30px rgba(0,0,0,.5);}
-.userDropdown button{width:100%;background:none;border:none;color:white;padding:8px;cursor:pointer;}
-.userBox.open .userDropdown{display:block}
-#loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#05070f;font-size:22px;z-index:999;display:none;}
-.hero{padding:80px 20px 40px;text-align:center;}
-.serverIP{margin-top:20px;display:inline-block;padding:14px 26px;border-radius:14px;background:linear-gradient(90deg,var(--accent),var(--accent2));font-weight:800;letter-spacing:1px;}
-.newsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;padding:40px;}
-.newsCard{background:var(--card);border-radius:18px;overflow:hidden;cursor:pointer;transition:.3s;display:flex;flex-direction:column;}
-.newsCard:hover{transform:translateY(-6px);}
-.newsCard img{width:100%;aspect-ratio:1/1;object-fit:cover;}
-.newsCard .content{padding:18px;}
-.newsCard h3{margin:0 0 10px;}
-.fullNews{max-width:900px;margin:60px auto;padding:0 20px;}
-.fullNews img{max-width:100%;border-radius:14px;margin:20px 0;}
-.fullNews .headerImg{width:100%;max-height:420px;object-fit:cover;border-radius:16px;}
+/* ===================== Navbar ===================== */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+nav .logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+nav .logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+nav .logo span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #FFD700;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: #FFD700;
+}
+
+/* ===================== Hamburger for mobile ===================== */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    transition: all 0.3s;
+}
+
+/* ===================== Hero Section ===================== */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 4rem 5%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(''); /* تصویر زمینه */
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    margin: 2rem;
+    flex-wrap: wrap;
+    animation: heroFade 1.5s ease-in-out;
+}
+
+@keyframes heroFade {
+    from {opacity:0; transform: translateY(-30px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+.server-info-box {
+    background: linear-gradient(135deg, #1f1f1f, #333);
+    padding: 2rem;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 350px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+
+.server-info-box:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+}
+
+.server-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FFD700;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+.server-ip {
+    font-size: 1.4rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.1);
+    padding: 0.6rem 1rem;
+    border-radius: 15px;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.server-ip:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.online-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.online-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #00FF00;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.6; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.hero-text {
+    max-width: 600px;
+    text-align: center;
+}
+
+.hero-text h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: #FFD700;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* ===================== News Section ===================== */
+.news-section {
+    padding: 3rem 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform: translateY(20px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+.news-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.news-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+}
+
+.news-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid #FFD700;
+}
+
+.news-card .content {
+    padding: 1rem;
+}
+
+.news-card .content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #FFD700;
+}
+
+.news-card .content p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ccc;
+}
+
+/* ===================== Footer ===================== */
+footer {
+    padding: 2rem 5%;
+    text-align: center;
+    background: rgba(0,0,0,0.6);
+    margin-top: 3rem;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+}
+
+/* ===================== Pages ===================== */
+.page {
+    display: none;
+    padding: 3rem 5%;
+}
+
+.page.active {
+    display: block;
+}
+
+/* ===================== Forms ===================== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: auto;
+    background: rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+form input {
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+form button {
+    margin-top: 1rem;
+    font-weight: 700;
+}
+
+/* ===================== Responsive ===================== */
+@media (max-width: 768px) {
+    nav ul {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: rgba(0,0,0,0.9);
+        flex-direction: column;
+        width: 200px;
+        padding: 1rem;
+        display: none;
+        border-radius: 0 0 0 15px;
+    }
+    nav ul.active {
+        display: flex;
+    }
+    .hamburger {
+        display: flex;
+    }
+    .hero {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+    .hero-text p {
+        font-size: 1rem;
+    }
+    .server-info-box {
+        width: 90%;
+    }
+}
 </style>
 </head>
 <body>
 
-<div id="loading">در حال بارگذاری...</div>
-
-<header>
-<div class="logoBox" onclick="goHome()">
-<img src="LOGO_URL_HERE" />
-<strong>JahanCraft</strong>
-</div>
+<!-- ===================== Navbar ===================== -->
 <nav>
-<a onclick="goHome()">خانه</a>
-<a onclick="loadNewsPage()">اخبار</a>
+    <div class="logo">
+        <img src="images/Screenshot__59_-removebg-preview.png" alt="Server Logo" id="server-logo">
+        <span>جهان‌کرفت</span>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <ul id="nav-links">
+        <li><a href="#" onclick="showPage('home')">خانه</a></li>
+        <li><a href="#" onclick="showPage('tutorial')">آموزش اتصال</a></li>
+        <li><a href="#" onclick="showPage('rules')">قوانین سرور</a></li>
+        <li><a href="#" onclick="showPage('login')">ورود به ناحیه کاربری</a></li>
+    </ul>
 </nav>
-<div id="authArea"></div>
-</header>
 
-<section id="app"></section>
+<!-- ===================== Home Page ===================== -->
+<div class="page active" id="home">
+    <section class="hero">
+        <div class="server-info-box">
+            <div class="server-name">Jahancraft</div>
+            <div class="server-ip">mc.jahancraft.ir</div>
+            <div class="online-status">
+                <div class="online-circle"></div>
+                آفلاین
+            </div>
+            <div class = "online_status">1.21.4 - java edition</div>
+        </div>
+        <div class="hero-text">
+            <h1>سرور لایف استیل جهان‌کرفت</h1>
+            <p>به دنیای بی‌نظیر ما خوش آمدید! اینجا می‌توانید با دوستانتان بازی کنید و لحظات فراموش‌ نشدنی بسازید.</p>
+        </div>
+    </section>
+
+    <section class="news-section">
+        <div class="news-card">
+            <img src="images/IMG_8361.jpeg" alt="خبر اول">
+            <div class="content">
+                <h3>سرور جهان کرفت بزودی ران می شود</h3>
+                <p>سرور ماینکرفتی لایف استیل جهان کرفت بزودی...</p>
+            </div>
+        </div>
+        <div class="news-card">
+            <img src="images/IMG_8350.jpeg" alt="خبر دوم">
+            <div class="content">
+                <h3>سایت رسمی جهان کرفت راه اندازی شد</h3>
+                <p>سایت رسمی جهان کرفت راه اندازی شد</p>
+            </div>
+        </div>
+        <div class="news-card">
+            <img src="images/IMG_8320.jpeg" alt="خبر سوم">
+            <div class="content">
+                <h3>طرح گرافیکی سرور جهان کرفت</h3>
+                <p>طرح گرافیکی لوگوی جهان‌کرفت</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ===================== Tutorial Page ===================== -->
+<div class="page" id="tutorial">
+    <h2>آموزش اتصال به سرور</h2>
+    <p>توضیحات کامل آموزش اتصال به سرور اینجا قرار می‌گیرد.</p>
+</div>
+
+<!-- ===================== Rules Page ===================== -->
+<div class="page" id="rules">
+    <h2>قوانین سرور</h2>
+    <p>قوانین کامل سرور اینجا قرار می‌گیرد.</p>
+</div>
+
+<!-- ===================== Login/Register Page ===================== -->
+<div class="page" id="login">
+    <h2>ورود / ثبت نام</h2>
+    <form id="register-form">
+        <input type="text" placeholder="اسم واقعی" required id="realname">
+        <input type="text" placeholder="نام کاربری" required id="username">
+        <input type="password" placeholder="رمز عبور" required id="password">
+        <button type="submit">ثبت نام</button>
+    </form>
+    <form id="login-form" style="margin-top:2rem;">
+        <input type="text" placeholder="نام کاربری" required id="login-username">
+        <input type="password" placeholder="رمز عبور" required id="login-password">
+        <button type="submit">ورود</button>
+    </form>
+</div>
+
+<footer>
+    © 2026 Jahancraft - جهان کرفت
+</footer>
 
 <script>
-/* ================= SUPABASE ================= */
-const SUPABASE_URL = "https://jlowxwiopeeltlnndhdb.supabase.co"; // جای URL پروژه
-const SUPABASE_KEY = "sb_publishable_dDDf6D2FjEzv6XtryAMwuw_-jNoRELe"; // جای ANON KEY
-
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-/* ================= GLOBAL ================= */
-let currentUser = JSON.parse(localStorage.getItem("user") || "null");
-
-/* ================= LOADING ================= */
-function showLoading(state){
-  document.getElementById("loading").style.display = state?"flex":"none";
+let currentPage = 'home';
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    document.getElementById(pageId).classList.add('active');
 }
 
-/* ================= AUTH ================= */
-function renderAuth(){
-  const box=document.getElementById("authArea");
-  if(!currentUser){
-    box.innerHTML=`<button onclick="showLogin()">ورود</button>`;
-    return;
-  }
-  box.innerHTML=`
-  <div class="userBox" onclick="toggleUserMenu(this)">
-    ${currentUser.real_name}
-    <div class="userDropdown">
-      <button onclick="logout()">خروج</button>
-    </div>
-  </div>`;
+function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('active');
 }
 
-function toggleUserMenu(el){el.classList.toggle("open");}
-function logout(){localStorage.removeItem("user"); currentUser=null; renderAuth(); goHome();}
-
-/* ================= NAV ================= */
-function goHome(){loadHome();}
-
-/* ================= HOME ================= */
-async function loadHome(){
-  showLoading(true);
-  try{
-    const {data,error} = await supabase.from("news").select("*").order("id",{ascending:false}).limit(3);
-    const app=document.getElementById("app");
-    if(error){console.log(error); app.innerHTML="<p>خطا در دریافت اخبار</p>"; return;}
-    const newsData = data || [];
-    app.innerHTML=`
-      <div class="hero">
-        <h1>سرور جهان کرفت</h1>
-        <div class="serverIP">play.jahancraft.ir</div>
-      </div>
-      <div class="newsGrid">
-        ${newsData.map(n=>newsCardHTML(n)).join("")}
-      </div>
-    `;
-  }catch(e){console.log(e);}
-  finally{showLoading(false);}
-}
-
-/* ================= NEWS PAGE ================= */
-async function loadNewsPage(){
-  showLoading(true);
-  try{
-    const {data,error} = await supabase.from("news").select("*").order("id",{ascending:false});
-    const app=document.getElementById("app");
-    if(error){console.log(error); app.innerHTML="<p>خطا در دریافت اخبار</p>"; return;}
-    const newsData = data || [];
-    app.innerHTML=`
-      <h2 style="padding:30px">اخبار سرور</h2>
-      <div class="newsGrid">
-        ${newsData.map(n=>newsCardHTML(n)).join("")}
-      </div>
-    `;
-  }catch(e){console.log(e);}
-  finally{showLoading(false);}
-}
-
-function newsCardHTML(n){
-  return `
-    <div class="newsCard" onclick="openNews(${n.id})">
-      <img src="${n.image_url}" />
-      <div class="content">
-        <h3>${n.title}</h3>
-      </div>
-    </div>`;
-}
-
-/* ================= FULL NEWS ================= */
-async function openNews(id){
-  showLoading(true);
-  try{
-    const {data,error} = await supabase.from("news").select("*").eq("id",id).single();
-    const app=document.getElementById("app");
-    if(error){console.log(error); app.innerHTML="<p>خطا در باز کردن خبر</p>"; return;}
-    const news = data || {};
-    app.innerHTML=`
-      <div class="fullNews">
-        <img class="headerImg" src="${news.image_url}" />
-        <h1>${news.title}</h1>
-        <div>${news.content}</div>
-      </div>`;
-  }catch(e){console.log(e);}
-  finally{showLoading(false);}
-}
-
-/* ================= LOGIN ================= */
-function showLogin(){
-  const app=document.getElementById("app");
-  app.innerHTML=`
-    <h2>ورود</h2>
-    <input id="u" placeholder="username"><br><br>
-    <input id="p" type="password" placeholder="password"><br><br>
-    <button onclick="login()">ورود</button>
-  `;
-}
-
-async function login(){
-  const username=document.getElementById("u").value;
-  const password=document.getElementById("p").value;
-  showLoading(true);
-  try{
-    const {data,error} = await supabase.from("users").select("*").eq("username",username).eq("password",password).single();
-    if(error || !data){alert("اطلاعات اشتباه است"); return;}
-    localStorage.setItem("user",JSON.stringify(data));
-    currentUser=data;
-    renderAuth();
-    goHome();
-  }catch(e){console.log(e);}
-  finally{showLoading(false);}
-}
-
-/* ================= INIT ================= */
-renderAuth();
-goHome();
+/* ===================== Login/Register ساده ===================== */
+let users = [];
+document.getElementById('register-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    let realname = document.getElementById('realname').value;
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+    users.push({realname, username, password});
+    alert("ثبت نام موفق!");
+    document.getElementById('register-form').reset();
+});
+document.getElementById('login-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    let username = document.getElementById('login-username').value;
+    let password = document.getElementById('login-password').value;
+    let user = users.find(u => u.username === username && u.password === password);
+    if(user) {
+        alert("ورود موفق! خوش آمدید " + user.realname);
+    } else {
+        alert("نام کاربری یا رمز عبور اشتباه است!");
+    }
+});
 </script>
 </body>
 </html>
