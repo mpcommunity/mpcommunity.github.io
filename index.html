@@ -1,453 +1,586 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سرور جهان‌کرفت | وبسایت رسمی</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+<title>سرور جهان‌کرفت </title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
-/* ===================== Reset ===================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Vazirmatn', sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Vazirmatn',sans-serif;
 }
 
-body {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    color: #fff;
-    overflow-x: hidden;
+body{
+    background: radial-gradient(circle at top right,#0f2027,#203a43,#000);
+    color:#fff;
+    overflow-x:hidden;
 }
 
-/* ===================== Navbar ===================== */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+/* ================= HEADER ================= */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+    backdrop-filter:blur(15px);
+    background:rgba(0,0,0,0.5);
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
-nav .logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
-nav .logo img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
+.logo-area img{
+    width:65px;
+    height:65px;
+    border-radius:14px;
+    object-fit:cover;
+    box-shadow:0 0 25px #00ffcc;
 }
 
-nav .logo span {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #FFD700;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+.server-name{
+    font-size:24px;
+    font-weight:800;
+    background:linear-gradient(45deg,#00ff99,#00c3ff);
+    -webkit-background-clip:text;
+    color:transparent;
 }
 
-nav ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
+nav{
+    display:flex;
+    gap:35px;
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    transition: 0.3s;
+nav a{
+    text-decoration:none;
+    color:#ccc;
+    font-weight:600;
+    transition:.3s;
 }
 
-nav ul li a:hover {
-    color: #FFD700;
+nav a:hover{
+    color:#00ffcc;
 }
 
-/* ===================== Hamburger for mobile ===================== */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
+/* ====== MOBILE MENU ====== */
+
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s ease;
 }
 
-.hamburger div {
-    width: 25px;
-    height: 3px;
-    background: #fff;
-    transition: all 0.3s;
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
 }
 
-/* ===================== Hero Section ===================== */
-.hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    padding: 4rem 5%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(''); /* تصویر زمینه */
-    background-size: cover;
-    background-position: center;
-    border-radius: 20px;
-    margin: 2rem;
-    flex-wrap: wrap;
-    animation: heroFade 1.5s ease-in-out;
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    backdrop-filter:blur(15px);
 }
 
-@keyframes heroFade {
-    from {opacity:0; transform: translateY(-30px);}
-    to {opacity:1; transform: translateY(0);}
+header::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,#00ffcc,transparent);
 }
 
-.server-info-box {
-    background: linear-gradient(135deg, #1f1f1f, #333);
-    padding: 2rem;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    width: 350px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-    transition: transform 0.5s, box-shadow 0.5s;
+
+.menu-toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
 }
 
-.server-info-box:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+.menu-toggle span{
+    width:28px;
+    height:3px;
+    background:#fff;
+    border-radius:3px;
 }
 
-.server-name {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #FFD700;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-}
-
-.server-ip {
-    font-size: 1.4rem;
-    font-weight: 600;
-    background: rgba(255,255,255,0.1);
-    padding: 0.6rem 1rem;
-    border-radius: 15px;
-    width: 100%;
-    text-align: center;
-    transition: 0.3s;
-}
-
-.server-ip:hover {
-    background: rgba(255,255,255,0.3);
-}
-
-.online-status {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    font-size: 1.1rem;
-}
-
-.online-circle {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #00FF00;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.5); opacity: 0.6; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-.hero-text {
-    max-width: 600px;
-    text-align: center;
-}
-
-.hero-text h1 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-    color: #FFD700;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-}
-
-.hero-text p {
-    font-size: 1.2rem;
-    color: #ccc;
-    margin-top: 0.5rem;
-    font-style: italic;
-}
-
-/* ===================== News Section ===================== */
-.news-section {
-    padding: 3rem 5%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    animation: fadeIn 1.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {opacity:0; transform: translateY(20px);}
-    to {opacity:1; transform: translateY(0);}
-}
-
-.news-card {
-    background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.4s, box-shadow 0.4s;
-}
-
-.news-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.7);
-}
-
-.news-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-bottom: 2px solid #FFD700;
-}
-
-.news-card .content {
-    padding: 1rem;
-}
-
-.news-card .content h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    color: #FFD700;
-}
-
-.news-card .content p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #ccc;
-}
-
-/* ===================== Footer ===================== */
-footer {
-    padding: 2rem 5%;
-    text-align: center;
-    background: rgba(0,0,0,0.6);
-    margin-top: 3rem;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
-}
-
-/* ===================== Pages ===================== */
-.page {
-    display: none;
-    padding: 3rem 5%;
-}
-
-.page.active {
-    display: block;
-}
-
-/* ===================== Forms ===================== */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 400px;
-    margin: auto;
-    background: rgba(255,255,255,0.05);
-    padding: 2rem;
-    border-radius: 15px;
-}
-
-form input {
-    padding: 0.7rem 1rem;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-}
-
-form button {
-    margin-top: 1rem;
-    font-weight: 700;
-}
-
-/* ===================== Responsive ===================== */
-@media (max-width: 768px) {
-    nav ul {
-        position: absolute;
-        top: 70px;
-        right: 0;
-        background: rgba(0,0,0,0.9);
-        flex-direction: column;
-        width: 200px;
-        padding: 1rem;
-        display: none;
-        border-radius: 0 0 0 15px;
+@media(max-width:900px){
+    nav{
+        position:fixed;
+        top:0;
+        right:-100%;
+        height:100vh;
+        width:250px;
+        background:#0b1c22;
+        flex-direction:column;
+        padding:100px 30px;
+        transition:.4s;
     }
-    nav ul.active {
-        display: flex;
+    nav.active{
+        right:0;
     }
-    .hamburger {
-        display: flex;
-    }
-    .hero {
-        flex-direction: column;
-        gap: 2rem;
-    }
-    .hero-text h1 {
-        font-size: 1.8rem;
-    }
-    .hero-text p {
-        font-size: 1rem;
-    }
-    .server-info-box {
-        width: 90%;
+    .menu-toggle{
+        display:flex;
     }
 }
+
+/* ================= HERO ================= */
+
+.hero{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:60px;
+    padding:100px 80px;
+    align-items:center;
+}
+
+.hero-text h1{
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+.hero-text p{
+    font-size:16px;
+    color:#bbb;
+}
+
+.hero-text .sub{
+    color:#00ffcc;
+    margin-top:8px;
+}
+
+/* ===== SERVER CARD BIGGER ===== */
+
+.server-card{
+    background:linear-gradient(145deg,rgba(0,255,150,0.08),rgba(0,0,0,0.6));
+    padding:45px;
+    border-radius:25px;
+    backdrop-filter:blur(25px);
+    box-shadow:0 0 60px rgba(0,255,200,0.3);
+    transition:.4s;
+    min-height:300px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.server-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 80px rgba(0,255,200,0.6);
+}
+
+.server-info{
+    font-size:24px;
+    margin-bottom:25px;
+    font-weight:700;
+}
+
+.ip-box{
+    background:#000;
+    padding:18px;
+    border-radius:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:18px;
+    font-weight:600;
+}
+
+.copy-btn{
+    background:#00ff99;
+    border:none;
+    padding:8px 16px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.status{
+    margin-top:25px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:18px;
+}
+
+.status-dot{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:#00ff00;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(0,255,0,0.7);}
+    70%{box-shadow:0 0 0 12px rgba(0,255,0,0);}
+    100%{box-shadow:0 0 0 0 rgba(0,255,0,0);}
+}
+
+
+/* ================= NEWS ================= */
+
+.news-section{
+    padding:80px;
+}
+
+.news-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.news-card{
+    background:rgba(255,255,255,0.05);
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.news-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 40px rgba(0,255,200,0.4);
+}
+
+.news-card img{
+    width:100%;
+    aspect-ratio:1 / 1;   /* مربع واقعی */
+    object-fit:cover;     /* بدون کشیدگی */
+    display:block;
+}
+
+
+.news-content{
+    padding:20px;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+/* اسکرول بار حرفه‌ای */
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0b1c22;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#00ff99,#00c3ff);
+    border-radius:20px;
+}
+
+.page{
+    animation:fadeIn .4s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content{
+    background:#111;
+    padding:30px;
+    border-radius:20px;
+    max-width:600px;
+    max-height:80vh;
+    overflow:auto;
+}
+
+.show{
+    display:flex;
+}
+
+.page.hidden{
+    display:none;
+}
+
+.footer{
+    background:#0b1418;
+    padding:50px 20px;
+    text-align:center;
+    margin-top:80px;
+    border-top:1px solid rgba(0,255,200,0.2);
+}
+
+.footer-logo{
+    font-size:24px;
+    font-weight:800;
+    background:linear-gradient(45deg,#00ff99,#00c3ff);
+    -webkit-background-clip:text;
+    color:transparent;
+    margin-bottom:15px;
+}
+
+.footer-text{
+    color:#aaa;
+    margin-bottom:10px;
+}
+
+.footer-dev span{
+    color:#00ffcc;
+    font-weight:600;
+}
+
+.footer-note{
+    margin-top:15px;
+    font-size:13px;
+    color:#666;
+}
+
+
+/* ===== Responsive Hero ===== */
+
+@media(max-width:900px){
+    .hero{
+        grid-template-columns:1fr;
+        padding:60px 25px;
+        gap:40px;
+    }
+    .news-section{
+        padding:60px 25px;
+    }
+    header{
+        padding:20px 25px;
+    }
+}
+
 </style>
 </head>
+<div id="loader">
+    <div class="spinner"></div>
+</div>
+
 <body>
 
-<!-- ===================== Navbar ===================== -->
-<nav>
-    <div class="logo">
-        <img src="images/Screenshot__59_-removebg-preview.png" alt="Server Logo" id="server-logo">
-        <span>جهان‌کرفت</span>
+<header>
+    <div class="logo-area">
+        <img src="images/IMG_8350.jpeg">
+        <div class="server-name">جهان‌کرفت</div>
     </div>
-    <div class="hamburger" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-    <ul id="nav-links">
-        <li><a href="#" onclick="showPage('home')">خانه</a></li>
-        <li><a href="#" onclick="showPage('tutorial')">آموزش اتصال</a></li>
-        <li><a href="#" onclick="showPage('rules')">قوانین سرور</a></li>
-        <li><a href="#" onclick="showPage('login')">ورود به ناحیه کاربری</a></li>
-    </ul>
-</nav>
 
-<!-- ===================== Home Page ===================== -->
-<div class="page active" id="home">
-    <section class="hero">
-        <div class="server-info-box">
-            <div class="server-name">Jahancraft</div>
-            <div class="server-ip">mc.jahancraft.ir</div>
-            <div class="online-status">
-                <div class="online-circle"></div>
-                آفلاین
-            </div>
-            <div class = "online_status">1.21.4 - java edition</div>
-        </div>
-        <div class="hero-text">
-            <h1>سرور لایف استیل جهان‌کرفت</h1>
-            <p>به دنیای بی‌نظیر ما خوش آمدید! اینجا می‌توانید با دوستانتان بازی کنید و لحظات فراموش‌ نشدنی بسازید.</p>
-        </div>
-    </section>
+    <nav id="navMenu">
+        <a href="#" onclick="showPage('home')">خانه</a>
+        <a href="#" onclick="showPage('connect')">آموزش اتصال</a>
+        <a href="#" onclick="showPage('rules')">قوانین</a>
+        <a href="#" id="loginBtn" onclick="showPage('login')">ورود</a>
+    </nav>
+</header>
 
-    <section class="news-section">
+<section id="home" class="page">
+<div class="hero">
+
+    <div class="hero-text">
+        <h1>سرور لایف استیل جهان‌کرفت</h1>
+        <p>سرور حرفه‌ای ماینکرفت با بهترین امکانات و رقابت واقعی و جوایز نقدی ویژه</p>
+        <div class="sub">تجربه‌ای متفاوت از بقا، PvP و جوایز نقدی</div>
+    </div>
+
+    <div class="server-card">
+        <div class="server-info">اطلاعات سرور جهان کرفت</div>
+        <div class="ip-box">
+            mc.jahancraft.ir
+            <button class="copy-btn" onclick="copyIP()">کپی</button>
+        </div>
+        <div style="margin-top:15px;font-size:18px;">نسخه: 1.21.4 - java</div>
+        <div class="status">
+            <div class="status-dot"></div>
+            سرور آفرین است
+        </div>
+    </div>
+
+</div>
+
+<div class="news-section">
+    <h2 style="margin-bottom:40px;">آخرین اخبار</h2>
+
+    <div class="news-grid">
         <div class="news-card">
-            <img src="images/IMG_8361.jpeg" alt="خبر اول">
-            <div class="content">
-                <h3>سرور جهان کرفت بزودی ران می شود</h3>
-                <p>سرور ماینکرفتی لایف استیل جهان کرفت بزودی...</p>
+            <img src="images/IMG_8361.jpeg">
+            <div class="news-content">
+                <h3>سرور جهان‌کرفت بزودی...</h3>
+                <p>سرور لایف استیل جهان‌کرفت بزودی استارت می‌خورد</p>
             </div>
         </div>
+
         <div class="news-card">
-            <img src="images/IMG_8350.jpeg" alt="خبر دوم">
-            <div class="content">
-                <h3>سایت رسمی جهان کرفت راه اندازی شد</h3>
-                <p>سایت رسمی جهان کرفت راه اندازی شد</p>
+            <img src="images/IMG_8350.jpeg">
+            <div class="news-content">
+                <h3>وبسایت رسمی جهان کرفت</h3>
+                <p>مسابقه ویژه این هفته...</p>
             </div>
         </div>
+
         <div class="news-card">
-            <img src="images/IMG_8320.jpeg" alt="خبر سوم">
-            <div class="content">
-                <h3>طرح گرافیکی سرور جهان کرفت</h3>
-                <p>طرح گرافیکی لوگوی جهان‌کرفت</p>
+            <img src="images/ramadan.jpg">
+            <div class="news-content">
+                <h3>حلول ماه رمضان بر تمامی شیعیان مبارک باد.</h3>
+                <p>واحد فنی جهان کرفت، حلول ماه رمضان را به تمام شیعیان تبریک می گوید.</p>
             </div>
         </div>
-    </section>
+    </div>
 </div>
+</section>
 
-<!-- ===================== Tutorial Page ===================== -->
-<div class="page" id="tutorial">
-    <h2>آموزش اتصال به سرور</h2>
-    <p>توضیحات کامل آموزش اتصال به سرور اینجا قرار می‌گیرد.</p>
+<section id="connect" class="page hidden">
+<div style="padding:80px 25px;">
+<h2>آموزش اتصال</h2>
+<p>وارد Minecraft شوید → Multiplayer → Add Server → وارد کردن IP</p>
 </div>
+</section>
 
-<!-- ===================== Rules Page ===================== -->
-<div class="page" id="rules">
-    <h2>قوانین سرور</h2>
-    <p>قوانین کامل سرور اینجا قرار می‌گیرد.</p>
+<section id="rules" class="page hidden">
+<div style="padding:80px 25px;">
+<h2>قوانین سرور</h2>
+<p>بزودی در این قسمت قرار می گیرد...</p>
 </div>
+</section>
 
-<!-- ===================== Login/Register Page ===================== -->
-<div class="page" id="login">
-    <h2>ورود / ثبت نام</h2>
-    <form id="register-form">
-        <input type="text" placeholder="اسم واقعی" required id="realname">
-        <input type="text" placeholder="نام کاربری" required id="username">
-        <input type="password" placeholder="رمز عبور" required id="password">
-        <button type="submit">ثبت نام</button>
-    </form>
-    <form id="login-form" style="margin-top:2rem;">
-        <input type="text" placeholder="نام کاربری" required id="login-username">
-        <input type="password" placeholder="رمز عبور" required id="login-password">
-        <button type="submit">ورود</button>
-    </form>
+<section id="login" class="page hidden">
+<div style="padding:60px 25px;">
+<h2>ورود / ثبت نام</h2>
+<input id="realname" placeholder="نام واقعی">
+<input id="username" placeholder="یوزرنیم">
+<input id="password" type="password" placeholder="پسورد">
+<button onclick="register()">ثبت نام</button>
+<button onclick="login()">ورود</button>
 </div>
+</section>
 
-<footer>
-    © 2026 Jahancraft - جهان کرفت
-</footer>
+<div class="modal" id="newsModal">
+<div class="modal-content">
+<h2 id="modalTitle"></h2>
+<img id="modalImg" style="width:100%;border-radius:15px;margin:15px 0;">
+<p>متن کامل خبر اینجا قرار میگیرد...</p>
+<button onclick="closeNews()">بستن</button>
+</div>
+</div>
 
 <script>
-let currentPage = 'home';
-function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
+
+function revealOnScroll(){
+    document.querySelectorAll(".reveal").forEach(el=>{
+        let windowHeight = window.innerHeight;
+        let elementTop = el.getBoundingClientRect().top;
+        if(elementTop < windowHeight - 100){
+            el.classList.add("active");
+        }
     });
-    document.getElementById(pageId).classList.add('active');
 }
 
-function toggleMenu() {
-    document.getElementById('nav-links').classList.toggle('active');
+window.addEventListener("scroll", revealOnScroll);
+
+
+function toggleMenu(){
+    document.getElementById("navMenu").classList.toggle("active");
 }
 
-/* ===================== Login/Register ساده ===================== */
-let users = [];
-document.getElementById('register-form').addEventListener('submit', function(e){
-    e.preventDefault();
-    let realname = document.getElementById('realname').value;
-    let username = document.getElementById('username').value;
-    let password = document.getElementById('password').value;
-    users.push({realname, username, password});
-    alert("ثبت نام موفق!");
-    document.getElementById('register-form').reset();
-});
-document.getElementById('login-form').addEventListener('submit', function(e){
-    e.preventDefault();
-    let username = document.getElementById('login-username').value;
-    let password = document.getElementById('login-password').value;
-    let user = users.find(u => u.username === username && u.password === password);
-    if(user) {
-        alert("ورود موفق! خوش آمدید " + user.realname);
-    } else {
-        alert("نام کاربری یا رمز عبور اشتباه است!");
+function copyIP(){
+    navigator.clipboard.writeText("play.jahancraft.ir");
+    alert("IP کپی شد!");
+}
+
+function showPage(id){
+    document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
+    document.getElementById("navMenu").classList.remove("active");
+}
+
+function openNews(title,img){
+    document.getElementById("modalTitle").innerText=title;
+    document.getElementById("modalImg").src=img;
+    document.getElementById("newsModal").classList.add("show");
+}
+
+function closeNews(){
+    document.getElementById("newsModal").classList.remove("show");
+}
+
+function register(){
+    let realname=document.getElementById("realname").value;
+    let username=document.getElementById("username").value;
+    let password=document.getElementById("password").value;
+    localStorage.setItem("user",JSON.stringify({realname,username,password}));
+    alert("ثبت نام انجام شد");
+}
+
+function login(){
+    let username=document.getElementById("username").value;
+    let password=document.getElementById("password").value;
+    let user=JSON.parse(localStorage.getItem("user"));
+    if(user && user.username===username && user.password===password){
+        document.getElementById("loginBtn").innerText=user.realname;
+        showPage("home");
+    }else{
+        alert("اطلاعات اشتباه است");
     }
-});
+}
 </script>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo">سرور لایف استیل جهان‌کرفت</div>
+        
+        <div class="footer-text">
+            © 2026 JahanCraft Network. تمامی حقوق محفوظ است.
+        </div>
+
+        <div class="footer-dev">
+            طراحی و توسعه توسط <span>آیهان قلی زاده</span>
+        </div>
+
+        <div class="footer-note">
+            JahanCraft is not affiliated with Mojang or Microsoft.
+        </div>
+    </div>
+</footer>
+
+
 </body>
 </html>
